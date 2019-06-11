@@ -1,0 +1,1281 @@
+@import "./_options"
+@import "./_default"
+
+// ============================
+// MAIN CODE START
+// ============================
+
+.preloader
+	background: linear-gradient(90deg, #630311 10%, #673ab7 90%)
+	overflow: hidden
+	position: fixed
+	left: 0
+	top: 0
+	right: 0
+	bottom: 0
+	z-index: 10000
+.prePreloader
+	height: 40px
+	width: 40px
+	position: absolute
+	left: 50%
+	margin-left: -20px
+	top: 50%
+	margin-top: -20px
+	&:before, &:after
+		content: ""
+		height: 40px
+		width: 40px
+		border: 8px solid rgba(255,255,255,.5)
+		border-radius: 10px
+		position: absolute
+		top: 0
+	&:before
+		animation: animate 2s infinite linear
+	&:after
+		animation: animate2 2s infinite linear
+		
+
+.container
+	width: 1230px
+	max-width: nth($mediaBp, 1)
+	margin-left: auto
+	margin-right: auto
+
+
+.header
+	&-grid
+		@include flex($fd: space-between)
+		background-color: #4c0015
+		align-items: center
+		&__col
+			padding: 5px 45px			
+	&-logo
+		color: #ffa789
+		font-size: 50px
+		font-weight: bold
+		padding: 10px
+		&.burger
+			font-size: 40px
+	&-icon
+		font-size: 20px
+		justify-content: center
+	&-menu
+		display: none
+.float
+	&-block
+		display: none
+		position: fixed
+		z-index: 2
+		top: 0
+	&-nav
+		position: fixed
+		background: #63031dde
+		width: 100vw
+		height: 50px
+		&-grid
+			@include flex
+			&__col
+				width: 200px
+				text-align: center
+.burger-menu
+	display: block
+	position: relative
+	width: 250px
+	height: 50px
+	&_active 
+		& .burger-menu__nav
+			display: block
+			right: 0
+		& .burger-menu__overlay
+			display: block
+		& .burger-menu__lines
+			display: block
+			background-color: transparent
+			transform: translate(0,0)
+			right: 0
+			padding-left: 28px
+			&:before
+				top: 0
+				transform: rotate(405deg)
+				width: 30px
+				transition: 1s
+				left: 20px
+			&:after
+				top: 0
+				transform: rotate(-405deg)
+				width: 30px
+				transition: 1s
+				left: 20px
+		& .burger-menu__button
+			border: none
+	&__nav
+		position: fixed
+		font-size: 22px
+		line-height: 2
+		display: none
+		flex-flow: column
+		border-radius: 0 0 0 15px
+		padding: 15px
+		background-color: #4c0015
+		width: 300px
+		z-index: 30
+		top: 47px
+		padding-top: 15px
+		overflow: scroll
+			x: hidden
+			y: auto
+		right: 30%
+		transition: .5s
+	&__overlay
+		display: none
+		position: fixed
+		top: 0
+		left: 0
+		width: 100vw
+		height: 100vh
+		z-index: 15
+	&__link
+		width: 100%
+		color: #fff
+		font-size: 22px
+		font-weight: bold
+		letter-spacing: .2em
+		line-height: 2em
+		color: grey / .7
+		text-decoration: none
+		&:hover
+			cursor: pointer
+			filter: brightness(.5)
+	&__button 
+		position: fixed
+		right: 0
+		top: 0
+		width: 220px
+		height: 50px
+		background-color: transparent
+		color: #ffa789
+		z-index: 30
+		border: solid 1px black
+			radius: 14px 0 0  14px
+		&:hover
+			cursor: pointer
+	&__lines
+		width: 70px
+		height: 4px		
+		position: absolute
+		top: 50%
+		// left: 50%
+		transform: translate(-50%, -50%)
+		background-color: black
+		&:after
+			position: absolute
+			content: ''
+			top: 12px
+			left: 50%
+			transform: translate(-50%, -50%)
+			width: 70px
+			height: 4px
+			background-color: black	
+		&:before
+			position: absolute
+			content: ''
+			top: -8px
+			left: 50%
+			transform: translate(-50%, -50%)
+			width: 70px
+			height: 4px
+			background-color: black
+.burger-catalog
+	display: block
+	&_active 
+		& .burger-catalog__nav
+			display: block
+			left: 0
+		& .burger-catalog__overlay
+			display: block
+		& .burger-catalog__button
+			width: 220px
+			right: 7px
+			transition: 2s
+			border: none
+	&__nav
+		position: fixed
+		width: 220px
+		font-size: 22px
+		line-height: 2
+		display: none
+		flex-flow: column
+		border-radius: 0 0 15px 0
+		padding: 15px
+		background-color: #4c0015
+		z-index: 20
+		overflow: scroll
+			x: hidden
+			y: auto
+		left: -100%
+		transition: .5s
+	&__overlay
+		display: none
+		position: fixed
+		top: 0
+		left: 0
+		width: 100vw
+		height: 100vh
+		z-index: 5
+	&__item
+		width: 100%
+		font-size: 18px
+		font-weight: bold
+		letter-spacing: .2em
+		line-height: 2em
+		text-decoration: none
+		z-index: 20
+		color: #fff
+		&:hover
+			cursor: pointer
+			filter: brightness(.5)
+	&__button 
+		color: #ffa789
+		display: flex
+		text-align: center
+		justify-content: center
+		align-items: center
+		font-size: 24px
+		padding-top: 10px
+		padding-bottom: 10px
+		z-index: 30
+		width: 220px
+		height: 100%
+		border: solid 1px black
+			radius: 0 14px 14px 0
+		&:hover
+			cursor: pointer	
+.nav-list
+	display: flex
+	li + li
+		padding-left: 35px
+	a
+		color: #fff
+		font-size: 23px
+
+.prev
+	&-block
+		&.disable
+			display: none
+		.container
+			padding-bottom: 45px
+	&-grid
+		background-color: #ffe2c02e
+		display: block
+		position: relative
+		height: 686px
+		z-index: 1
+		&__col
+			width: 100%
+			&__img
+				display: none
+		&-grid2
+			width: 100%
+			display: none
+			&__group
+				@include grid2($c: 3)
+				justify-content: space-between
+			&.active
+				display: block
+			&__items
+				height: 100%
+				width: 100%
+				display: flex
+				justify-content: center
+				align-items: center
+				text-align: center
+			&__col
+				width: 300px
+				height: 686px
+				img
+					width: 100%
+					height: 100%
+				li
+					font-size: 21px
+					border: solid 1px grey
+					display: flex
+					margin: 21px auto
+					padding: 10px
+					width: 100%
+					height: 15%
+					&:hover
+						box-shadow: inset 1px 1px 5px 1px grey
+					img
+						width: 35%
+						height: 100%
+					a
+						@include flex($jc: center, $ai: center)
+						font-size: 20px
+				
+		&__col:not(:first-child)
+			padding-left: 200px
+	&-catalog
+		position: absolute
+		font-size: 26px
+		width: 200px
+		height: 100%
+		z-index: 1
+		&__item
+			line-height: 3.2
+			display: flex
+			width: 100%
+			padding-left: 35px
+			&-all
+				padding-left: 10px
+				line-height: 2
+				display: flex
+				text-transform: uppercase
+				width: 100%
+
+.product
+	&-block
+		&.disable
+			display: none
+		&-grid
+			@include flex($fw: wrap)
+			width: 100%
+		.container
+			@include flex($fd: column)
+		&-item
+			display: none
+			width: 100%
+			&.active
+				display: block
+	&-list
+		@include flex
+		position: relative
+		padding-bottom: 70px
+		&__buttons
+			@include flex($fw: wrap)
+			&-button
+				line-height: 2
+				padding: 10px
+				background: #ffe2c02e
+				border: solid 1px lightgrey
+					radius: 15px
+				text-transform: capitalize
+				&:hover
+					box-shadow: 7px 13px 29px -2px rgba(0,0,0,0.59)
+				&.active
+					box-shadow: 7px 13px 29px -2px rgba(0,0,0,0.59)
+	&-title
+		font-size: 35px
+		padding: 60px 0 10px 0
+		width: 100%
+		position: relative
+		top: 0
+		display: none
+		justify-content: center
+		&.active
+			display: flex
+		&-all
+			padding-top: 50px
+			font-size: 50px
+	&-grid
+		width: 100%
+		display: none
+		// @include grid2($c: 3)
+		padding: 10px 10px 20px 10px
+		position: relative
+		&.active		
+			@include flex($fw: wrap)
+		&__col
+			border: solid 2px lightgrey
+			width: 260px
+			height: 260px
+			padding: 10px
+			margin: 15px
+			text-align: center
+			transition: 1s
+			&:hover
+				cursor: pointer
+				box-shadow: 7px 13px 29px -2px rgba(0,0,0,0.59)
+	&-item
+		height: 100%
+		@include flex($fd: column, $ai: center)
+		&__title
+			height: 50%
+			display: flex
+			align-items: center
+		
+.sidenav-content
+	&-item
+		width: 250px
+		@include flex($fd: column)
+		&__sign
+			height: 50px
+			text-align: center
+			@include flex
+		&__title
+			font-size: 28px
+			padding: 30px 0
+
+.checkbox-2
+	cursor: pointer
+	display: block
+	input
+		display: none	
+		& + span
+			display: block
+			position: relative
+			float: left
+			width: 50px
+			height: 24px
+			margin-right: 20px		
+			background-color: #ddd
+			border-radius: 50px
+			transition:all 0.2s ease-in-out
+			box-shadow:inset 0 0 10px rgba(0,0,0,.6)
+		&:checked + span
+			background-color: #ffb240
+		& + span:before
+			content: ''
+			position: absolute
+			top: 2%
+			left: 2px
+			height: 96%
+			width: 25px
+			background-color: #fefefe
+			border-radius: 50px
+			transition:all 0.2s ease-in-out
+			box-shadow: inset 5px -5px 10px 5px rgba(0,0,0,.2), 0 0 4px 0 rgba(0,0,0,.7)
+		&:checked + span:before
+			left: 24px
+
+.show-more
+	display: flex
+	position: relative
+	padding: 10px
+	border-radius: 8px
+	border: 1px solid #d9d9d9
+	width: 100%
+	background: #fbf6f0
+	justify-content: center
+	font-size: 20px
+	bottom: 0
+	left: 50%
+	transform: translate(-50%, 50%)
+	transition: 1s easy
+	cursor: pointer
+	&:hover		
+		border: solid 1px grey
+		background: #a0796a
+	&__acordion
+		text-align: center
+		font-size: 16px
+    	line-height: 1.2
+    	width: 150px
+    	height: 40px
+    	font-weight: 700
+    	padding: 10px 30px 10px 15px
+		bottom: 50px
+
+.slidePrice
+	&-holder
+		width: 100%
+		display: flex
+		padding: 10px
+		margin-top: 50px
+		border-radius: 8px
+		border: 1px solid #d9d9d9
+		width: 100%
+		margin: 0 auto
+		background: #fbf6f0
+		justify-content: center
+		span
+			padding: 0 4px
+		input
+			width: 50px
+			border: none
+			text-align: center
+			background: #fbf6f0*.95
+.ui
+	&-slider
+		width: 80%
+		margin: 30px auto
+		right: 8px
+		position: relative
+		&-handle
+			position: absolute
+			width: 22px
+			height: 22px
+			border: solid 1px transparent
+			background: #ffb240
+			top: 60%
+			transform: translateY(-50%)
+			box-shadow: 0 2px 3px #606060
+			cursor: w-resize
+			outline: 0
+			&:nth-child(2n)
+				margin-left: -22px
+		&-range
+			position: absolute
+			z-index: 1
+			font-size: 12px
+			display: block
+			border: 0
+			overflow: hidden
+			top: 0
+			height: 100%
+			&-min
+				left: 5px
+			&-max
+				right: 0
+		&-horizontal
+			height: 10px
+	&-widget
+		&-content
+			border: solid 1px #fff
+			background: #ddd
+			left: 1px
+		&-header
+			border: solid 1px #fff
+			background: #f00
+	&-corner
+		&-all
+			border-radius: 20px
+
+.footer
+	&-block
+		border-top: 1px solid lightgrey
+		background: #ffe2c02e
+	&-logo
+		text-align: center
+		font-size: 60px
+	&-number
+		font-size: 25px
+		padding: 15px
+	&-schedule
+		font-size: 22px
+	&-grid
+		padding: 35px 0
+		@include grid2($c: 4, $jc: space-around)
+		&__col
+			font-size: 28px
+			&-title
+				text-align: center
+				padding-bottom: 15px
+			&-list
+				line-height: 1.5
+				font-size: 22px
+			&:nth-child(3)
+				padding-top: 47px
+			&:first-child
+				text-align: center
+	&-bottom
+		background: #4c0015
+		padding: 25px 0
+		&-copy
+			display: flex
+			justify-content: center
+			font-size: 20px
+			width: 100%
+			color: #fff
+    
+.question
+	&-block
+		display: none
+		&.active
+			display: block
+		&.disable
+			display: none
+		&__title
+			font-size: 60px
+			padding-top: 60px
+		&-form
+			background: #fbf6f0
+	&-grid
+		@include grid2($c: 2, $g: 75px)
+		&__col
+			position: relative
+		&__title
+			font-size: 27px
+			padding: 40px 0
+			text-align: center
+		&-list
+			padding: 20px 0 80px 0
+			&__items
+				margin-top: 10px
+				border: solid #f1eeeb
+				border-width: 1px 0
+				padding: 10px 20px			
+				&__question
+					position: relative
+					font-size: 20px
+					width: 80%
+					padding-bottom: 10px		
+					height: 100%	
+				&__answer
+					text-indent: 25px
+					font-size: 17px		
+					width: 80%
+					display: none
+			.active	
+				background: #fbf6f0
+				.question-grid-list__items__question
+					text-shadow: 1px 0 0 #6c4c40
+					font-style: italic
+				.question-grid-list__items__answer
+					display: block
+				.drop-arrow:before
+					margin-left: 32%
+					transform: rotate(180deg)					
+				.drop-arrow
+					background: white			
+
+.form
+	margin: 0 auto
+	font-size: 15px
+	width: 70%
+	background-color: #fbf6f0
+	padding: 70px 0
+	color: red
+	border-radius: 4px
+	overflow: hidden
+	&-header
+		font-size: 28px
+		text-align: center
+		padding: .77em
+		width: 100%
+		&__title
+			span
+				color: black
+	&-wrap
+		@include flex($fd: column, $fw: wrap)
+		padding-bottom: 30px
+		&__col
+			@include flex
+			width: 100%
+	&-item
+		width: 48%
+		font-size: 0.93em
+		position: relative
+		font-size: 22px
+		margin-top: 30px
+		background: #fff
+		&_ta
+			width: 100%
+			height: 150px
+		&__input
+			padding-top: 15px
+			display: block
+			width: 100%
+			font-size: 1em
+			border: none
+				bottom: 1px solid #d6d6d6
+			padding: 0.66em 1em
+			font-family: "Open Sans"
+			background-color: transparent
+			position: relative
+			z-index: 1
+			&_ta
+				width: 100%
+				height: 150px
+		&__text
+			color: #bdbdbd
+			position: absolute
+			left: 1em
+			top: 50%
+			transform: translate(0, -50%)
+			transition: .3s
+			&_ta
+				top: 20%
+		&__line
+			border-bottom: 1px solid black
+			width: 0
+			position: absolute
+			left: 0
+			bottom: 0
+			transition: .5s
+			z-index: 2
+		&__line.active
+			width: 100%
+		&__text.active
+			top: 0
+			transform: translate(0, -100%)
+			font-size: 0.8em			
+.button
+	display: inline-block
+	font-family: "Open Sans"
+	font-weight: 600
+	font-size: 15px
+	color: white
+	margin: 0 auto
+	text-transform: capitalize
+	border: none
+	background-color: transparent
+	transition: .2s
+	cursor: pointer
+	text-transform: uppercase
+	&_theme
+		&_brown
+			border: 1px solid #fff
+			box-shadow: inset 0 0 0 1px rgba(#fff, .8)
+			padding: .66em 2em
+			&:hover
+				background-color: #fff
+				color: white
+			border-radius: 4px
+			padding: 18px 25px
+			margin-bottom: 20px
+			background-color: #4f352c
+			box-shadow: 0 1px 1px 0 rgba(#000, .2)
+			&:hover
+				background-color: black
+
+.drop-arrow
+	position: absolute
+	height: 35px
+	width: 35px
+	right: -20%
+	top: 0
+	border: solid 1px lightgrey
+		radius: 50%
+	background: #fbf6f0
+	&:before
+		content: '\f102'
+		display: inline-block
+		font-family: "Font Awesome 5 Free"
+		font-weight: 600
+		color: grey
+		font-style: normal
+		vertical-align: top
+		font-size: 20px
+		right: -30%
+		top: 50%
+		margin-top: 15%
+		margin-left: 31%
+		backface-visibility: hidden
+		transition: transform .2s ease
+		bottom: 10px
+.delivery
+	&-block
+		display: none
+		&.active
+			display: block
+		&.disable
+			display: none
+	.main-content
+		padding: 50px
+		text-align: justify
+	&-content
+		h2
+			font-size: 40px
+			padding-top: 60px
+
+.stock
+	&__title
+		padding-top: 60px
+		font-size: 50px
+		text-align: center
+	&-block
+		&.disable
+			display: none
+		&.active
+			display: block
+		&-grid
+			padding-bottom: 50px
+	&-grid
+		@include grid2($c: 4, $g: 60px)
+		padding: 10px 0
+		&__col
+			width: 100%
+			padding: 15px
+	&-items
+		border: solid 0px grey
+			radius: 15px
+		border-bottom: 0
+		&:hover
+			box-shadow: -1px 6px 9px 3px rgba(0,0,0,0.25)
+		&-link
+			img
+				width: 100%
+			&__data
+				@include flex($fd: column)
+				align-items: center
+				padding: 15px
+		&__footer
+			@include flex($fw: wrap)
+			&__label
+				border: solid 1px #862626
+					top-left-radius: 10px
+					top-right-radius: 10px
+				width: 100%
+				height: 60px
+				background: #862626
+				color: #fff
+				display: flex
+				text-align: center
+				justify-content: center
+				align-items: center
+			&__dates
+				background: #862626
+				color: #fff	
+				font-size: 15px
+				border: solid 1px #862626
+					right: 0
+					top: 0
+					bottom-left-radius: 10px
+				width: 45%
+				padding: 5px
+				span
+					@include flex($fd: column)
+				height: 60px
+			&__Dleft
+				border: solid 1px
+					left: 0
+					top: 0
+					bottom-right-radius: 10px
+				width: 45%
+				height: 60px
+				padding: 5px
+				animation: blur .75s ease-out infinite
+				text-shadow: 0px 0px 5px #fff, 0px 0px 7px #fff
+				span
+					@include flex($fd: column, $jc: center, $ai: center)
+					text-align: center
+
+.contact
+	&-block
+		display: none
+		&.active
+			display: block
+	&-grid
+		@include flex()
+		&__title
+			padding: 50px 0
+			font-size: 60px
+			text-align: center
+		&__item
+			padding: 15px 20px
+			text-align: center
+			&__title
+				font-size: 30px
+				text-align: center
+				padding: 20px 0
+				border-top: 1px solid black
+				margin-top: 10px
+			&__text
+				padding: 0 15%
+				text-align: center
+			&__data
+				text-align: center
+				font-size: 27px
+			&-grid2
+				@include flex()
+				position: relative
+				padding: 60px 0
+				div + div
+					padding-right: 30px
+				border-top: solid 1px black
+				&__col
+					position: relative
+					&:first-child
+						&:after
+							content: ''
+							position: absolute
+							right: 0
+							top: -60px
+							height: 120%
+							border: solid 1px black
+							margin-right: 15px
+					&__list
+						@include flex
+				&__title
+					text-align: center
+					padding: 25px 0
+				&__list
+					@include grid2($c: 2)
+					&__item
+						@include flex
+						&__city
+							padding: 0 25px
+			&-form
+				width: 400px
+				.form
+					width: 100%
+					padding: 30px
+					&-wrap
+						@include flex($fd: column, $fw: wrap)
+						padding-bottom: 30px
+						&__col
+							@include flex($fw: wrap)
+							width: 100%
+					&-item
+						width: 100%
+						&__input
+							width: 100%
+							&_ta
+								width: 100%
+.buttons-set
+	text-align: center
+
+// ============================
+// MAIN CODE END
+// ============================
+@keyframes animate
+	0%
+		transform: rotate(0) skew(0)
+	100%
+		transform: rotate(180deg) skew(360deg)
+@keyframes animate2
+	0%
+		transform: rotate(0) skew(0) 
+	100%
+ 		transform: rotate(-180deg) skew(-360deg)
+@keyframes blur 
+	from
+		color: black
+	to
+		color: red
+@for $i from 1 to length($mediaBp)
+	@media (max-width: nth($mediaBp, $i))
+		.container
+			max-width: nth($mediaBp, $i + 1)
+
+// ============================
+// MEDIA QUARIES
+// ============================
+
+@media (max-width: nth($mediaBp, 1))
+	.prev
+		&-grid
+			height: 686px
+			&-grid2
+				&__col
+					width: 280px
+		&-catalog
+			height: 100%
+			font-size: 23px
+	.contact
+		&-grid
+		 @include flex($fw: wrap, $jc: center)
+@media (max-width: nth($mediaBp, 2))
+	.main-content
+		img
+			width: 70%
+			height: 70%
+	.nav
+		display: none
+	.header
+		&-grid
+			position: relative
+	.header-menu
+		display: block
+		position: absolute
+		top: 0
+		bottom: 0
+		right: 0
+		width: 200px
+		&_active 
+			& .header-menu__nav
+				display: block
+				right: 0
+			& .header-menu__overlay
+				display: block
+			& .header-menu__lines
+				background-color: transparent
+				transform: translate(0,0)
+				right: 0
+				padding-left: 28px
+				&:before
+					top: 0
+					transform: rotate(405deg)
+					width: 30px
+					transition: 1s
+				&:after
+					top: 0
+					transform: rotate(-405deg)
+					width: 30px
+					transition: 1s
+			& .header-menu__button
+				border: none
+		&__nav
+			position: absolute
+			right: 0
+			width: 300px
+			font-size: 22px
+			line-height: 2
+			display: none
+			flex-flow: column
+			border-radius: 0 0 0 25px
+			padding: 15px
+			background-color: #4c0015
+			z-index: 20
+			overflow: scroll
+				x: hidden
+				y: auto
+			top: 60px	
+			right: 0
+			transition: .5s
+		&__overlay
+			display: none
+			position: fixed
+			top: 0
+			left: 0
+			width: 100vw
+			height: 100vh
+			z-index: 15
+		&__link
+			width: 100px
+			color: #fff
+			font-size: 22px
+			font-weight: bold
+			letter-spacing: .2em
+			line-height: 2em
+			color: grey / .7
+			text-decoration: none
+			&:hover
+				cursor: pointer
+				filter: brightness(.5)
+		&__button
+			position: absolute
+			width: 100%
+			height: 100%
+			background-color: #4c0015
+			color: #ffa789
+			z-index: 30
+			border: solid 1px black
+				radius: 14px
+			&:hover
+				cursor: pointer
+		&__lines
+			width: 70px
+			height: 4px		
+			position: absolute
+			left: 50%
+			top: 50%
+			transform: translate(-50%, -50%)
+			background-color: black
+			&:after
+				position: absolute
+				content: ''
+				top: 7px
+				width: 70px
+				height: 4px
+				background-color: black	
+			&:before
+				position: absolute
+				content: ''
+				top: -7px
+				width: 70px
+				height: 4px
+				background-color: black
+
+
+	.prev
+		&-catalog
+			font-size: 21px
+		&-grid
+			height: 540px
+			&__col
+				&:not(:first-child)
+					padding-left: 150px					
+			&-grid2
+				&__group
+					@include grid2($c: 2)
+					justify-content: space-around
+				&__col			
+					width: 280px
+					&__img
+						display: none
+					li
+						height: 12%
+	.stock
+		&-grid
+			@include grid2($c: 4, $g: 20px)	
+		
+
+		
+
+@media (max-width: nth($mediaBp, 3))
+	.prev
+		&-catalog
+			font-size: 18px
+			&__item
+				padding-left: 10px
+				line-height: 3
+		&-grid
+			height: 426px
+			&__col:not(:first-child)
+				padding-left: 130px
+			&-grid2
+				&__col
+					height: 426px	
+					li
+						margin: 10px auto
+						height: 17%
+	.stock
+		&-grid
+			@include grid2($c: 3, $g: 40px)	
+		
+	.contact
+		&-grid
+			&__item
+				&-grid2
+					@include flex($fw: wrap)
+					&__col
+						&:first-child
+							&:after
+								display: none
+					&__list
+						@include grid2($c: 1)
+@media (max-width: nth($mediaBp, 4))
+	.prev
+		&-catalog
+			width: 100px
+			font-size: 15px
+		&-grid
+			height: 360px
+			&-grid2
+				&__col
+					height: 360px
+					li
+						font-size: 11px
+						width: 75%
+						height: 16%
+						a
+							font-size: 14px
+			&__col:not(:first-child)
+				padding-left: 100px	
+	.stock
+		&-grid
+			@include grid2($c: 2, $g: 30px)
+	
+	.footer-grid
+		@include grid2($c: 2, $jc: space-between)
+		font-size: 20px
+	
+@media (max-width: nth($mediaBp, 5))
+	.prev
+		&-grid
+			height: 255px
+			&-grid2
+				&__col
+					height: 255px
+					width: 180px
+					li
+						
+						margin: 5px
+						padding: 5px
+						width: 88%
+						height: 17.5%
+						a
+							font-size: 11px
+		&-catalog
+			@include grid2($c: 1)
+			font-size: 12px
+			&__item
+				line-height: 1.1
+				padding-left: 15px	
+	.burger-catalog
+		&__button
+			width: 130px
+		&__nav
+			width: 180px
+	.burger-menu
+		width: 110px
+		&__button
+			width: 110px
+
+	.sidenav-content
+		&-item
+			width: 100%
+			&:not(:first-child)
+				@include grid2($c: 2)
+	.checkbox-2
+		width: 150px
+		margin-top: 20px
+	.slidePrice
+		&-holder
+			input
+				width: 60px
+	.product
+		&-list
+			@include grid2
+
+	.question
+		&-grid
+			@include grid2($c: 1, $g: 75px)
+
+	.contact
+		&-grid
+			&__item
+				width: 300px
+	.contact
+		&-grid
+			&__item
+				&-form
+					width: 250px
+@media (max-width: nth($mediaBp, 6))
+	.prev
+		&-grid
+			height: 460px
+			&__col
+				&__img
+					display: block
+			&__col:not(:first-child)
+				padding-left: 75px
+			&-grid2
+				&__group
+					@include grid2($c: 1, $g: 0)
+		&-catalog
+			@include grid2($c: 1)
+			font-size: 12px
+			width: 77.5px	
+			&__item
+				line-height: .3
+				padding: 15px 10px 15px 10px
+			&-grid2
+				&:nth-child(2)
+					display: block
+				&__col
+					padding-left: 50px
+					width: 220px
+					li
+						width: 100%
+	.stock
+		&-grid
+			@include grid2($c: 1)
+			
+	.slider__content
+		display: none
+	.header
+		&-menu
+			width: 100px
+			&__lines
+				transform: translate(-22%, -25%)
+				left: 30%
+			&__nav
+				width: 320px
+
+	.burger-catalog
+		&__button
+			width: 130px
+		&__nav
+			width: 180px
+	.burger-menu
+		width: 110px
+		&__button
+			width: 110px
+	.sidenav-content
+		&-item
+			width: 100%
+			&:not(:first-child)
+				@include grid2($c: 2)
+	.checkbox-2
+		width: 150px
+		margin-top: 20px
+	.slidePrice
+		&-holder
+			input
+				width: 60px
+	.main-content
+		img
+			display: none
